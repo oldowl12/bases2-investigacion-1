@@ -1,17 +1,32 @@
-import Axios from 'axios';
-import React, {Fragment} from 'react';
+import {axiosInstance} from '../config';
+import React, {Fragment, Component} from 'react';
 
-export default function Example() {
-	Axios.get(`/api/arangoTest`).then(res =>{
-		console.log(res.data);
-	});
-	return (
-		<Fragment>
-			<h2 style={{textAlign: 'center', marginBottom: '10px'}}> Hello React Express World </h2>
-			<span style={{display: 'block', textAlign: 'center'}}> Thank you for using create-app-react-express </span>
-			<span style={{display: 'block', textAlign: 'center', marginTop: '25px'}}> If you have any suggestions or found any bugs, </span>
-			<span style={{display: 'block', textAlign: 'center'}}> please email me at: <i style={{color: '#007bff'}}> valchygaming@gmail.com </i> </span>
-			<span  style={{display: 'block', textAlign: 'center'}}></span>
-		</Fragment>
-	);
+export default class Example extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			data: {}
+		}
+	}
+
+	handleChange(event) {
+		this.setState({[event.target.name]: event.target.value});
+	}
+
+	componentDidMount(){
+		console.log("mounted");
+		axiosInstance.get(`/api/arangoTest`).then(res =>{
+			this.setState({data: res.data});
+		});
+	}
+
+	render() {
+		
+		return (
+			<Fragment>
+				<h2 style={{textAlign: 'center', marginBottom: '10px'}}> Hello React Express World </h2>
+				<span style={{display: 'block', textAlign: 'center', marginTop: '25px'}}>{this.state.data.message}</span>
+			</Fragment>
+		)
+	}
 }
