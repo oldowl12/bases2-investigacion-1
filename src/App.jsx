@@ -2,10 +2,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Link, Switch, Route} from 'react-router-dom';
 import { Nav } from 'react-bootstrap'
-import 'react-bootstrap/dist/react-bootstrap.min.js';
+import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
-import Example from './components/Example.jsx';
+import CapitalFinder from './components/CapitalFinder.jsx';
 
 // Main Entry point function
 function App() {
@@ -14,13 +14,13 @@ function App() {
 					<div id="headerPanel">
 						<Nav className="justify-content-center" as='ul'>
 							<Nav.Item as="li">
-								<Link to={'/Example'}>Ejemplo</Link>
+								<Link to={'/CapitalFinder'}>City Data</Link>
 							</Nav.Item>
 						</Nav>
 					</div>
 					<div id="switchPanel">
 						<Switch>
-							<Route path='/Example' component={Example} />
+							<Route path='/CapitalFinder' component={CapitalFinder} />
 						</Switch>
 					</div>
 				</div>

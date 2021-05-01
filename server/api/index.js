@@ -25,7 +25,49 @@ router.get('/', limiter, speedLimiter, (req, res) => {
 	});
 });
 
+router.get('/getContinents', (req, res) =>{
+	continents = []
+	db.query(`
+		FOR doc IN worldVertices
+			FILTER doc.type == 'continent'
+			RETURN doc
+	`).then(
+		cursor => cursor.all()
+	).then(
+		
+		keys => {res.json({continents: keys})},
+		err => res.status(500).json({msg: err})
+	);
+});
+
+router.get('/getCountries/:continent', (req, res) =>{
+	db.query(`
+		FOR doc IN worldEdges
+			FILTER doc._to == 'worldVertices/continent-${req.params.continent.toLowerCase()}'
+			RETURN doc
+	`).then(
+		cursor => cursor.all()
+	).then(
+		keys => res.json({countries: keys}),
+		err => res.status(500).json({msg: err})
+	);
+});
+
+router.get('/getCapital/:country', (req, res) =>{
+	db.query(`
+		FOR doc IN worldEdges
+			FILTER doc._to == 'worldVertices/country-${req.params.country}'
+			RETURN doc
+	`).then(
+		cursor => cursor.all()
+	).then(
+		keys => res.json({capital: keys}),
+		err => res.status(500).json({msg: err})
+	);
+});
+
 router.get('/arangoTest', (req, res) =>{
+
 	db.listCollections().then(function(res) {
 		res.forEach((coll, i) => {
 			console.log(`${i+1}. ${coll.name} (ID=${coll.id}, system=${coll.isSystem})`)
@@ -38,7 +80,5 @@ router.get('/arangoTest', (req, res) =>{
 		message: 'Arango tested'
 	})
 });
-
-// router.use('/example-path', example); ==> to be routed to: api/chosen_path for example
 
 module.exports = router;
