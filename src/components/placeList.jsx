@@ -2,7 +2,7 @@ import { axiosInstance } from '../config';
 import React, { Fragment, Component } from 'react';
 import { Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'
-export default class CapitalFinder extends Component {
+export default class placeList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -84,7 +84,8 @@ export default class CapitalFinder extends Component {
 		return true;
 	}
 	onChangeCapital(e) {
-		console.log('onCapitalChange');
+		let selectedCapital = e.target.value;
+		this.props.onCapitalChange(selectedCapital);
 	}
 
 	render() {
@@ -111,7 +112,7 @@ export default class CapitalFinder extends Component {
 						{this.state.selectedCountry != '' &&
 							<Form.Group controlId="MainForm.capital">
 								<Form.Label style={{ textAlign: 'center', marginBottom: '10px' }}> Select a Capital: </Form.Label>
-								<Form.Control name="capitalSelect" as="select" size="sm" >
+								<Form.Control name="capitalSelect" as="select" size="sm" onChange={this.onChangeCapital}>
 									<option></option>
 									{this.loadCapitals()}
 								</Form.Control>

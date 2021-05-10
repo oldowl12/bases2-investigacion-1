@@ -35,25 +35,29 @@ router.get('/getContinents', (req, res) =>{
 		cursor => cursor.all()
 	).then(
 		
-		keys => {res.json({continents: keys})},
+		keys => {console.log(keys); res.json({continents: keys})},
 		err => res.status(500).json({msg: err})
 	);
 });
 
 router.get('/getCountries/:continent', (req, res) =>{
+	let c = req.params.continent.toLowerCase().replace(' ','-');
+	console.log("to: ", c);
 	db.query(`
 		FOR doc IN worldEdges
-			FILTER doc._to == 'worldVertices/continent-${req.params.continent.toLowerCase()}'
+			FILTER doc._to == 'worldVertices/continent-${c}'
 			RETURN doc
 	`).then(
 		cursor => cursor.all()
 	).then(
-		keys => res.json({countries: keys}),
+		keys => {console.log(keys); res.json({countries: keys})},
 		err => res.status(500).json({msg: err})
 	);
 });
 
 router.get('/getCapital/:country', (req, res) =>{
+	let c = req.params.country;
+	console.log("to: ", c.toLocaleLowerCase());
 	db.query(`
 		FOR doc IN worldEdges
 			FILTER doc._to == 'worldVertices/country-${req.params.country}'
@@ -61,10 +65,25 @@ router.get('/getCapital/:country', (req, res) =>{
 	`).then(
 		cursor => cursor.all()
 	).then(
-		keys => res.json({capital: keys}),
+		keys => {console.log(keys); res.json({capital: keys})},
 		err => res.status(500).json({msg: err})
 	);
 });
+
+router.get('/getRoute/:place1/:place2', (req, res) =>{
+	db.query(`
+		FOR v IN ANY SHORTEST_PATH 
+		'worldVertices/capital-${req.params.place1}' TO 'worldVertices/capital-${req.params.place2}' 
+		worldEdges 
+		RETURN v
+	`).then(
+		cursor => cursor.all()
+	).then(
+		keys => {console.log(keys); res.json({route: keys})},
+		err => res.status(500).json({msg: err})
+	);
+});
+
 
 router.get('/arangoTest', (req, res) =>{
 

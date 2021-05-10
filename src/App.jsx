@@ -5,26 +5,14 @@ import { Nav } from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
-import CapitalFinder from './components/CapitalFinder.jsx';
+import RouteFinder from './components/RouteFinder.jsx';
 
 // Main Entry point function
 function App() {
-	return <BrowserRouter>
-				<div>
-					<div id="headerPanel">
-						<Nav className="justify-content-center" as='ul'>
-							<Nav.Item as="li">
-								<Link to={'/CapitalFinder'}>City Data</Link>
-							</Nav.Item>
-						</Nav>
-					</div>
-					<div id="switchPanel">
-						<Switch>
-							<Route path='/CapitalFinder' component={CapitalFinder} />
-						</Switch>
-					</div>
-				</div>
-			</BrowserRouter>;
+	return	<div>
+				<RouteFinder></RouteFinder>
+			</div>;
+
 }
 
 /**
