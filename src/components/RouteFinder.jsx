@@ -68,11 +68,19 @@ export default class RouteFinder extends Component {
         if(this.state.search) this.calculateRoute();
         return (
             <Fragment>
-                <h1>Buscador de ruta de avion</h1>
+                <h1 className="title">Air Travel Path</h1>
                 <hr/>
                 <div className="horizontal">
-                    <div><PlaceList onCapitalChange={this.handleChange1}/></div>
-                    <div><PlaceList onCapitalChange={this.handleChange2}/></div>
+                    <div>
+                        <h2>From</h2>
+                        <hr/>
+                        <PlaceList onCapitalChange={this.handleChange1}/>
+                    </div>
+                    <div>
+                        <h2>To</h2>
+                        <hr/>
+                        <PlaceList onCapitalChange={this.handleChange2}/>
+                    </div>
                 </div>
                 <div className="horizontal">
                     <h1>{this.state.place1} &#8594; {this.state.place2}</h1>

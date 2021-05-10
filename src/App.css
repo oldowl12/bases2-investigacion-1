@@ -1,10 +1,12 @@
 body {
     text-align: center;
     font-family: 'Open Sans', sans-serif;
-    background-color: white;
+    background-color: #caf0f8;
     padding-left: 20pt;
     padding-right: 20pt;
     overflow-y: scroll;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
 }
 
 #headerPanel{
@@ -42,4 +44,18 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+    background-color: #00b4d8;
+    border-style: hidden;
+    border-radius: 4pt;
+    margin-top: 10pt;
+    padding-top: 5pt;
+}
+
+.horizontal p {
+    margin-top: 5pt;
+}
+
+.title {
+    color: #20555f;
+    margin-top: 10pt;
 }

@@ -91,7 +91,6 @@ export default class placeList extends Component {
 	render() {
 		return (
 			<Fragment>
-				<div>
 					<Form>
 						<Form.Group controlId="MainForm.ContinentSelect">
 							<Form.Label style={{ textAlign: 'center', marginBottom: '10px' }}> Select a continent: </Form.Label>
@@ -119,7 +118,6 @@ export default class placeList extends Component {
 							</Form.Group>
 						}
 					</Form>
-				</div>
 			</Fragment>
 		)
 	}
