@@ -40,7 +40,8 @@ body {
 }
 
 .horizontal {
-    width: 100%;
+    margin-left: 10%;
+    width: 80%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
